@@ -1,3 +1,2 @@
-sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-sudo xcodebuild -runFirstLaunch
-brew install cocoapods
+sudo gem update --system
+sudo gem install cocoapods -n /usr/local/bin
