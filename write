@@ -1,9 +1,2 @@
-cd ~
-nano ~/.zshenv
-
-
-
-
-export PATH=$PATH:$HOME/Downloads/flutter/bin
-source ~/.zshenv
-flutter --version
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -runFirstLaunch
