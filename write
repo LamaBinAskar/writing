@@ -1,7 +1,1 @@
-# روح للمجلد الرئيسي للمشروع
-cd pulsehearflutter-main/pulse_hear-main
-
-# تأكد إنك في المكان الصحيح (لازم يكون فيه ملف pubspec.yaml)
-ls pubspec.yaml
-
-flutter pub get
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
