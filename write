@@ -1,4 +1,25 @@
-tor_graphics_compiler 1.1.20 (1.2.0 available)
+er_blue_plus_web 7.0.2 (8.2.1 available)
+  flutter_lints 2.0.3 (6.0.0 available)
+  flutter_local_notifications 17.2.4 (21.0.0 available)
+  flutter_local_notifications_linux 4.0.1 (8.0.0 available)
+  flutter_local_notifications_platform_interface 7.2.0 (11.0.0 available)
+  flutter_svg 2.2.3 (2.2.4 available)
+  google_fonts 8.0.1 (8.0.2 available)
+  hooks 1.0.1 (1.0.2 available)
+  just_audio 0.9.46 (0.10.5 available)
+  lints 2.1.1 (6.1.0 available)
+  meta 1.17.0 (1.18.1 available)
+  native_toolchain_c 0.17.4 (0.17.5 available)
+  permission_handler 11.4.0 (12.0.1 available)
+  permission_handler_android 12.1.0 (13.0.1 available)
+  petitparser 7.0.1 (7.0.2 available)
+  record 5.2.1 (6.2.0 available)
+  record_linux 0.7.2 (1.3.0 available)
+  speech_to_text 6.6.2 (7.3.0 available)
+  tflite_flutter 0.10.4 (0.12.1 available)
+  timezone 0.9.4 (0.11.0 available)
+  vector_graphics 1.1.19 (1.1.20 available)
+  vector_graphics_compiler 1.1.20 (1.2.0 available)
 Got dependencies!
 29 packages have newer versions incompatible with dependency constraints.
 Try `flutter pub outdated` for more information.
@@ -10,4 +31,22 @@ No wireless devices were found.
 
 [1]: macOS (macos)
 [2]: Chrome (chrome)
-Please choose one (or "q" to quit): 
+Please choose one (or "q" to quit): 1
+Launching lib/main.dart on macOS in debug mode...
+Error: Unable to get Xcode project information:
+ 2026-03-14 09:32:29.239 xcodebuild[15783:144992] Error Domain=NSCocoaErrorDomain Code=3840
+ "JSON text did not start with array or object and option to allow fragments not set. around
+ line 1, column 0." UserInfo={NSDebugDescription=JSON text did not start with array or object
+ and option to allow fragments not set. around line 1, column 0.,
+ NSJSONSerializationErrorIndex=0}
+2026-03-14 09:32:29.250 xcodebuild[15783:144992] Writing error result bundle to
+/var/folders/df/5f6dhj9560nc6k0dfkqsd7kw0000gq/T/ResultBundle_1447-25-09_09-32-0029.xcresult
+xcodebuild: error: Unable to read project 'Runner.xcodeproj'.
+        Reason: The project ‘Runner’ is damaged and cannot be opened due to a parse error. Examine the
+        project file for invalid edits or unresolved source control conflicts.
+
+Path:
+/Users/lama/Downloads/pulsehearflutter-main/pulsehearflutter-main/pulse_hear-main/macos/Runner.x
+codeproj
+
+
