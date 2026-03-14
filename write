@@ -1,8 +1,2 @@
-[!] Xcode - develop for iOS and macOS (Xcode 26.3)
-    ✗ Unable to get list of installed Simulator runtimes.
-[✓] Chrome - develop for the web
-[✓] Connected device (2 available)
-[✓] Network resources
-
-! Doctor found issues in 2 categories.
-lama@Raghads-MacBook-Pro ~ % 
+flutter clean
+flutter pub get
