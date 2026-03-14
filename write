@@ -1,86 +1,589 @@
-import 'dart:typed_data';
-import 'package:flutter/services.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
-
-class YamnetClassifier {
-  static const _modelPath = 'assets/models/yamnet.tflite';
-  static const int _frameLength = 15600;
-
-  late final Interpreter _interpreter;
-  final List<String> labels = List.filled(521, 'unknown');
-
-  Future<void> init() async {
-    // بدون GPU delegate - يشتغل على iOS و Android و macOS
-    final options = InterpreterOptions()..threads = 2;
-
-    _interpreter = await Interpreter.fromAsset(
-      _modelPath,
-      options: options,
-    );
-
-    debugPrint('[YamnetClassifier] Loaded successfully');
-  }
-
-  Float32List prepareInput(Uint8List pcmBytes) {
-    final nSamples = pcmBytes.lengthInBytes ~/ 2;
-    final samples = Float32List(_frameLength);
-
-    for (int i = 0; i < samples.length; i++) {
-      if (i < nSamples) {
-        final offset = i * 2;
-        final byte1 = pcmBytes[offset];
-        final byte2 = pcmBytes[offset + 1];
-        int s = (byte2 << 8) | byte1;
-        if (s > 32767) s -= 65536; // تحويل لـ signed
-        samples[i] = (s / 32768.0).clamp(-1.0, 1.0);
-      } else {
-        samples[i] = 0.0;
-      }
-    }
-
-    return samples;
-  }
-
-  Map<String, dynamic> classify(Uint8List pcmBytes) {
-    final input = prepareInput(pcmBytes);
-
-    // YAMNet input: [15600] → output: [1, 521]
-    final inputTensor = [input.toList()];
-    final outputTensor = [List.filled(521, 0.0)];
-
-    _interpreter.run(inputTensor, outputTensor);
-
-    double maxScore = 0;
-    int maxIndex = 0;
-
-    for (int i = 0; i < 521; i++) {
-      final score = outputTensor[0][i];
-      if (score > maxScore) {
-        maxScore = score;
-        maxIndex = i;
-      }
-    }
-
-    return {
-      'label': labels[maxIndex],
-      'confidence': maxScore,
-    };
-  }
-
-  Future<void> readLabels(String fileName) async {
-    try {
-      final raw = await rootBundle.loadString('assets/labels/$fileName');
-      final lines = raw.split('\n');
-      for (int i = 0; i < lines.length && i < 521; i++) {
-        labels[i] = lines[i].trim();
-      }
-      debugPrint('[YamnetClassifier] Labels loaded: ${lines.length}');
-    } catch (e) {
-      debugPrint('[YamnetClassifier] Labels error: $e');
-    }
-  }
-
-  void dispose() {
-    _interpreter.close();
-  }
-}
+[{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "uri_does_not_exist",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/uri_does_not_exist",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Target of URI doesn't exist: 'package:flutter/material.dart'.\nTry creating the file referenced by the URI, or try using a URI for a file that does exist.",
+	"source": "dart",
+	"startLineNumber": 1,
+	"startColumn": 8,
+	"endLineNumber": 1,
+	"endColumn": 39,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 5,
+	"startColumn": 16,
+	"endLineNumber": 5,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_method",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_method",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "The method 'Color' isn't defined for the type 'AppColors'.\nTry correcting the name to the name of an existing method, or defining a method named 'Color'.",
+	"source": "dart",
+	"startLineNumber": 5,
+	"startColumn": 34,
+	"endLineNumber": 5,
+	"endColumn": 39,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 5,
+	"startColumn": 34,
+	"endLineNumber": 5,
+	"endColumn": 51,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 6,
+	"startColumn": 16,
+	"endLineNumber": 6,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_method",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_method",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "The method 'Color' isn't defined for the type 'AppColors'.\nTry correcting the name to the name of an existing method, or defining a method named 'Color'.",
+	"source": "dart",
+	"startLineNumber": 6,
+	"startColumn": 33,
+	"endLineNumber": 6,
+	"endColumn": 38,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 6,
+	"startColumn": 33,
+	"endLineNumber": 6,
+	"endColumn": 50,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 7,
+	"startColumn": 16,
+	"endLineNumber": 7,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_method",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_method",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "The method 'Color' isn't defined for the type 'AppColors'.\nTry correcting the name to the name of an existing method, or defining a method named 'Color'.",
+	"source": "dart",
+	"startLineNumber": 7,
+	"startColumn": 34,
+	"endLineNumber": 7,
+	"endColumn": 39,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 7,
+	"startColumn": 34,
+	"endLineNumber": 7,
+	"endColumn": 51,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 8,
+	"startColumn": 16,
+	"endLineNumber": 8,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_method",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_method",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "The method 'Color' isn't defined for the type 'AppColors'.\nTry correcting the name to the name of an existing method, or defining a method named 'Color'.",
+	"source": "dart",
+	"startLineNumber": 8,
+	"startColumn": 36,
+	"endLineNumber": 8,
+	"endColumn": 41,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 8,
+	"startColumn": 36,
+	"endLineNumber": 8,
+	"endColumn": 53,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 9,
+	"startColumn": 16,
+	"endLineNumber": 9,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_method",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_method",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "The method 'Color' isn't defined for the type 'AppColors'.\nTry correcting the name to the name of an existing method, or defining a method named 'Color'.",
+	"source": "dart",
+	"startLineNumber": 9,
+	"startColumn": 33,
+	"endLineNumber": 9,
+	"endColumn": 38,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 9,
+	"startColumn": 33,
+	"endLineNumber": 9,
+	"endColumn": 50,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 10,
+	"startColumn": 16,
+	"endLineNumber": 10,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_method",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_method",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "The method 'Color' isn't defined for the type 'AppColors'.\nTry correcting the name to the name of an existing method, or defining a method named 'Color'.",
+	"source": "dart",
+	"startLineNumber": 10,
+	"startColumn": 34,
+	"endLineNumber": 10,
+	"endColumn": 39,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 10,
+	"startColumn": 34,
+	"endLineNumber": 10,
+	"endColumn": 51,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 11,
+	"startColumn": 16,
+	"endLineNumber": 11,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_method",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_method",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "The method 'Color' isn't defined for the type 'AppColors'.\nTry correcting the name to the name of an existing method, or defining a method named 'Color'.",
+	"source": "dart",
+	"startLineNumber": 11,
+	"startColumn": 33,
+	"endLineNumber": 11,
+	"endColumn": 38,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 11,
+	"startColumn": 33,
+	"endLineNumber": 11,
+	"endColumn": 50,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 14,
+	"startColumn": 16,
+	"endLineNumber": 14,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_identifier",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_identifier",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined name 'Color'.\nTry correcting the name to one that is defined, or defining the name.",
+	"source": "dart",
+	"startLineNumber": 14,
+	"startColumn": 31,
+	"endLineNumber": 14,
+	"endColumn": 36,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 14,
+	"startColumn": 31,
+	"endLineNumber": 14,
+	"endColumn": 59,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_class",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_class",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Undefined class 'Color'.\nTry changing the name to the name of an existing class, or creating a class with the name 'Color'.",
+	"source": "dart",
+	"startLineNumber": 15,
+	"startColumn": 16,
+	"endLineNumber": 15,
+	"endColumn": 21,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "undefined_method",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/undefined_method",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "The method 'Color' isn't defined for the type 'AppColors'.\nTry correcting the name to the name of an existing method, or defining a method named 'Color'.",
+	"source": "dart",
+	"startLineNumber": 15,
+	"startColumn": 34,
+	"endLineNumber": 15,
+	"endColumn": 39,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/Users/lama/Desktop/pulsehearflutter/pulsehearflutter-main/pulse_hear-main/lib/core/app_colors.dart",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": {
+		"value": "const_initialized_with_non_constant_value",
+		"target": {
+			"$mid": 1,
+			"path": "/diagnostics/const_initialized_with_non_constant_value",
+			"scheme": "https",
+			"authority": "dart.dev"
+		}
+	},
+	"severity": 8,
+	"message": "Const variables must be initialized with a constant value.\nTry changing the initializer to be a constant expression.",
+	"source": "dart",
+	"startLineNumber": 15,
+	"startColumn": 34,
+	"endLineNumber": 15,
+	"endColumn": 51,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+}]
