@@ -1,2 +1,3 @@
-cd "/Users/lama/Downloads/pulsehearflutter-main/pulsehearflutter-main/pulse_hear-main"
-ls
+flutter clean
+flutter pub get
+flutter run
