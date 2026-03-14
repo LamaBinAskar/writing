@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'yamnet_classifier.dart';
 
@@ -35,7 +36,7 @@ class BleAudioService extends ChangeNotifier {
         await analyzeCurrentAudio();
         break;
       case 'battery_update':
-      // تحديث البطارية
+        // TODO: تحديث قيمة البطارية من الإشارة
         notifyListeners();
         break;
     }
@@ -45,15 +46,18 @@ class BleAudioService extends ChangeNotifier {
     isListening = true;
     notifyListeners();
 
-    // dummy audio buffer (لاحقًا من just_audio)
+    // dummy audio buffer (لاحقًا تستبدل ببيانات حقيقية من just_audio / المايك)
     final pcmBytes = Uint8List(31200);
 
     final result = yamnet.classify(pcmBytes);
 
-    print('🧠 YAMNet: ${result['label']} (${result['confidence']})');
+    final label = result['label']?.toString() ?? '';
+    final confidence =
+        (result['confidence'] is num) ? (result['confidence'] as num).toDouble() : 0.0;
 
-    if (result['label'].toString().toLowerCase().contains('prayer') ||
-        result['confidence'] > 0.7) {
+    print('🧠 YAMNet: $label ($confidence)');
+
+    if (label.toLowerCase().contains('prayer') || confidence > 0.7) {
       triggerAdhanAlert();
     }
 
@@ -63,7 +67,7 @@ class BleAudioService extends ChangeNotifier {
 
   void triggerAdhanAlert() {
     print('🕌 أذان مُكتشف! إشعار + اهتزاز');
-    // هنا: local notification + vibration
+    // هنا لاحقًا: local notification + vibration + Bluetooth feedback
   }
 
   void disconnect() {
