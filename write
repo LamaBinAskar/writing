@@ -1,1 +1,6 @@
+pwd
+ls
 cd "/Users/lama/Downloads/pulsehearflutter-main/pulse_hear-main"
+pwd
+ls
+flutter pub get
