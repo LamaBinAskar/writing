@@ -1,64 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pulse_hear/views/bluetooth-asayel/bluetooth_search_screen.dart';
-import 'package:pulse_hear/views/soundlibrary-asayel/sound_library_screen.dart';
+import '../../services/ble_audio_service.dart';
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+class DashboardScreen extends StatefulWidget {
+  final BleAudioService service;
 
+  const DashboardScreen({Key? key, required this.service}) : super(key: key);
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE8ECF4),
+      backgroundColor: const Color(0xFF0F0D27),
       body: Column(
         children: [
-          // 1. Header Section
-          Container(
-            width: double.infinity,
-            height: 150,
-            decoration: const BoxDecoration(
-              color: Color(0xFF1D1B3F),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50),
-              ),
-            ),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Positioned.fill(
-                    child: Image.asset(
-                      'assets/images/smallwaves.png',
-                      fit: BoxFit.cover,
-                    ),
+          const SizedBox(height: 50),
+
+          // 1. العنوان
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'PulseHear',
+                  style: GoogleFonts.poppins(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  Positioned(
-                    bottom: -50,
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      width: 260,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.notifications_none,
+                      color: Colors.white70, size: 26),
+                  onPressed: () => print("Notifications tapped"),
+                ),
+              ],
             ),
           ),
 
-          const SizedBox(height: 25),
+          const SizedBox(height: 20),
 
-          // 2. Connection Status Card
+          // 2. كرت السوار
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 19),
-            child: InkWell(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/bluetooth');
+                // مثال لاختبار BLE + YAMNet
+                widget.service.connectToESP32('XIAO_ESP32S3');
+                widget.service.onDeviceSignal('adhan_detected');
               },
-              borderRadius: BorderRadius.circular(40),
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -86,8 +81,8 @@ class DashboardScreen extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.white70, width: 1.5),
+                            border: Border.all(
+                                color: Colors.white70, width: 1.5),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Icon(Icons.power_settings_new,
@@ -100,7 +95,9 @@ class DashboardScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            'Connected',
+                            widget.service.isConnected
+                                ? 'Connected to ${widget.service.deviceName}'
+                                : 'Not connected',
                             style: GoogleFonts.poppins(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
@@ -110,8 +107,8 @@ class DashboardScreen extends StatelessWidget {
                           const Text(
                             'Your Wristband is ready to alert you',
                             textAlign: TextAlign.center,
-                            style:
-                            TextStyle(color: Colors.white70, fontSize: 11),
+                            style: TextStyle(
+                                color: Colors.white70, fontSize: 11),
                           ),
                           const SizedBox(height: 12),
                           Container(
@@ -149,7 +146,7 @@ class DashboardScreen extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // 3. Features Grid
+          // 3. الشبكة (الأيقونات)
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -162,38 +159,38 @@ class DashboardScreen extends StatelessWidget {
                   _buildIconCard(
                     'Sound Library',
                     'assets/images/sound_library.png',
-                        () => Navigator.pushNamed(context, '/sounds'),
+                    () => Navigator.pushNamed(context, '/sounds'),
                   ),
                   _buildIconCard(
                     'Keywords',
                     'assets/images/keyword-2 1.png',
-                        () =>
-                        Navigator.pushNamed(context, '/keywords'), // ✅ FIXED
+                    () => Navigator.pushNamed(context, '/keywords'),
                   ),
                   _buildIconCard(
                     'Speech-To-Text',
                     'assets/images/speech_to_text.png',
-                        () => print("Navigate to Speech-To-Text"),
+                    () => print("Navigate to Speech-To-Text"),
                   ),
                   _buildIconCard(
                     'Text-To-Speech',
                     'assets/images/text_to_speech.png',
-                        () => print("Navigate to Text-To-Speech"),
+                    () => print("Navigate to Text-To-Speech"),
                   ),
                   _buildIconCard(
                     'Modes',
                     'assets/images/modes.png',
-                        () => print("Navigate to Modes"),
+                    () => print("Navigate to Modes"),
                   ),
                 ],
               ),
             ),
           ),
 
-          // 4. Nav Bar
+          // 4. شريط التنقّل
           Container(
             height: 75,
-            margin: const EdgeInsets.only(bottom: 25, left: 20, right: 20),
+            margin:
+                const EdgeInsets.only(bottom: 25, left: 20, right: 20),
             decoration: BoxDecoration(
               color: const Color(0xFF1D1B3F),
               borderRadius: BorderRadius.circular(35),
@@ -202,8 +199,8 @@ class DashboardScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 IconButton(
-                  icon:
-                  const Icon(Icons.home, color: Colors.white, size: 28),
+                  icon: const Icon(Icons.home,
+                      color: Colors.white, size: 28),
                   onPressed: () => print("Home tapped"),
                 ),
                 IconButton(
@@ -224,7 +221,8 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildIconCard(String title, String imagePath, VoidCallback onTap) {
+  Widget _buildIconCard(
+      String title, String imagePath, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(30),
@@ -263,39 +261,4 @@ class DashboardScreen extends StatelessWidget {
       ),
     );
   }
-
-  class DashboardScreen extends StatefulWidget {
-  final BleAudioService service;
-
-  const DashboardScreen({Key? key, required this.service}) : super(key: key);
-
-  @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-  }
-
-  class _DashboardScreenState extends State<DashboardScreen> {
-  @override
-  Widget build(BuildContext context) {
-  return Scaffold(
-  // شاشة Dashboard الحالية + ...
-  body: Column(
-  children: [
-  // زر البلوتوث المحدّث
-  ElevatedButton(
-  onPressed: () {
-  widget.service.connectToESP32('XIAO_ESP32S3'); // اختبار
-  widget.service.onDeviceSignal('adhan_detected'); // اختبار YAMNet
-  },
-  child: Text(widget.service.isConnected
-  ? 'متصل (${widget.service.deviceName})'
-      : 'ربط السوار'),
-  ),
-
-  // باقي الشاشة الحالية...
-  ],
-  ),
-  );
-  }
-  }
-
 }
