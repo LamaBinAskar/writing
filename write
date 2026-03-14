@@ -1,6 +1,6 @@
-Error: No pubspec.yaml file found.
-This command should be run from the root of your Flutter project.
-Expected to find project root in current working directory.
-Error: No pubspec.yaml file found.
-This command should be run from the root of your Flutter project.
-lama@Raghads-MacBook-Pro Pulsehear-Flutter % 
+cd "/Users/lama/Downloads/pulsehearflutter-main"
+pwd
+ls
+cd "Pulsehear-Flutter"
+pwd
+ls
