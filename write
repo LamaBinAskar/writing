@@ -1,8 +1,4 @@
-ls   # (بس للتأكيد إنك تشوفين pubspec.yaml)
-
-flutter clean
-
-flutter pub get
-
-flutter run
 cd "/Users/lama/Downloads/pulsehearflutter-main/Pulsehear-Flutter"
+flutter clean
+flutter pub get
+flutter run
