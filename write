@@ -1,8 +1,661 @@
-cd "/Users/lama/Downloads/pulsehearflutter-main/pulsehearflutter-main/pulse_hear-main"
-git pull
-flutter clean
-flutter pub get
-flutter run -d ios
-# أو لو تبين على simulator:
-open -a Simulator
-flutter run
+ma@Raghads-MacBook-Pro pulsehearflutter-main-2 % flutter analyze
+Analyzing pulsehearflutter-main-2...                                    
+
+   info • The imported package 'provider' isn't a dependency of the importing package •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:2:8 •
+          depend_on_referenced_packages
+  error • Target of URI doesn't exist: 'package:provider/provider.dart' •
+         pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:2:8 •
+         uri_does_not_exist
+   info • Constructors for public widgets should have a named 'key' parameter •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:6:7 •
+          use_key_in_widget_constructors
+   info • Invalid use of a private type in a public API •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:8:3 •
+          library_private_types_in_public_api
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:45:16 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:46:26 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:62:18 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:66:13 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:67:13 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:70:22 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:72:13 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:75:22 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:77:13 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:79:24 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:86:24 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:90:13 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:94:22 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:96:26 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:100:21 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:102:30 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:104:21 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:111:45 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:116:21 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:122:41 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:124:39 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:128:25 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:137:46 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:140:34 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:149:13 •
+          prefer_const_constructors
+  error • The method '_handleBleSignal' isn't defined for the type 'BleAudioService' •
+         pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:155:37 •
+         undefined_method
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:158:34 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:160:26 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:162:22 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:165:13 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:171:28 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:174:23 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:175:34 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/screens/home_screen.dart:176:23 •
+          prefer_const_constructors
+   info • The constant name 'SERVICE_UUID' isn't a lowerCamelCase identifier •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:14:23 •
+          constant_identifier_names
+   info • The constant name 'CHAR_SIGNAL_UUID' isn't a lowerCamelCase identifier •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:15:23 •
+          constant_identifier_names
+   info • The constant name 'CHAR_KEYWORD_UUID' isn't a lowerCamelCase identifier •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:16:23 •
+          constant_identifier_names
+   info • The constant name 'DEVICE_NAME' isn't a lowerCamelCase identifier •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:17:23 •
+          constant_identifier_names
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:57:7 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:71:7 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:74:7 •
+          avoid_print
+  error • A value of type 'List<BluetoothService>' can't be assigned to a variable of type
+         'List<BluetoothService2>' •
+         pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:83:42 •
+         invalid_assignment
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:97:7 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:99:7 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:110:9 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:114:7 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:154:7 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:160:7 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:166:7 •
+          avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:181:5 •
+          avoid_print
+   info • The type name 'BluetoothService_' isn't an UpperCamelCase identifier •
+          pulsehearflutter-main/pulse_hear-main/lib/services/bluetooth_service.dart:199:7 •
+          camel_case_types
+warning • The value of the field '_sampleRate' isn't used •
+       pulsehearflutter-main/pulse_hear-main/lib/services/yamnet_classifier.dart:7:16 •
+       unused_field
+  error • The named parameter 'allowPrecisionLoss' isn't defined •
+         pulsehearflutter-main/pulse_hear-main/lib/services/yamnet_classifier.dart:50:9 •
+         undefined_named_parameter
+  error • Undefined name 'TfLiteInferencePriority' •
+         pulsehearflutter-main/pulse_hear-main/lib/services/yamnet_classifier.dart:51:29 •
+         undefined_identifier
+  error • Undefined name 'TfLiteInferencePriority' •
+         pulsehearflutter-main/pulse_hear-main/lib/services/yamnet_classifier.dart:52:29 •
+         undefined_identifier
+  error • Undefined name 'TfLiteInferencePriority' •
+         pulsehearflutter-main/pulse_hear-main/lib/services/yamnet_classifier.dart:53:29 •
+         undefined_identifier
+  error • The named parameter 'inferencePriority4' isn't defined •
+         pulsehearflutter-main/pulse_hear-main/lib/services/yamnet_classifier.dart:54:9 •
+         undefined_named_parameter
+  error • Undefined name 'TfLiteInferencePriority' •
+         pulsehearflutter-main/pulse_hear-main/lib/services/yamnet_classifier.dart:54:29 •
+         undefined_identifier
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/services/yamnet_classifier.dart:62:5 •
+          avoid_print
+  error • The named parameter 'service' is required, but there's no corresponding argument •
+         pulsehearflutter-main/pulse_hear-main/lib/views/auth-elaf/sign_in_screen.dart:195:63 •
+         missing_required_argument
+  error • The named parameter 'service' is required, but there's no corresponding argument •
+         pulsehearflutter-main/pulse_hear-main/lib/views/auth-elaf/sign_up_screen.dart:242:63 •
+         missing_required_argument
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:60:48 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:72:48 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:100:38 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:109:36 • deprecated_member_use
+  error • Undefined class 'StreamSubscription' •
+         pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scree
+         n.dart:160:23 • undefined_class
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:163:27 • avoid_print
+   info • 'name' is deprecated and shouldn't be used. Use platformName instead •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:163:55 • deprecated_member_use
+warning • The left operand can't be null, so the right operand is never executed •
+       pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_screen.
+       dart:163:63 • dead_null_aware_expression
+   info • 'name' is deprecated and shouldn't be used. Use platformName instead •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:164:40 • deprecated_member_use
+warning • The receiver can't be null, so the null-aware operator '?.' is unnecessary •
+       pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_screen.
+       dart:164:44 • invalid_null_aware_operator
+   info • 'name' is deprecated and shouldn't be used. Use platformName instead •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:165:40 • deprecated_member_use
+warning • The receiver can't be null, so the null-aware operator '?.' is unnecessary •
+       pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_screen.
+       dart:165:44 • invalid_null_aware_operator
+   info • 'name' is deprecated and shouldn't be used. Use platformName instead •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:166:40 • deprecated_member_use
+warning • The receiver can't be null, so the null-aware operator '?.' is unnecessary •
+       pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_screen.
+       dart:166:44 • invalid_null_aware_operator
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:169:29 • avoid_print
+   info • 'name' is deprecated and shouldn't be used. Use platformName instead •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:169:57 • deprecated_member_use
+   info • Don't use 'BuildContext's across async gaps •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:172:49 • use_build_context_synchronously
+   info • Don't use 'BuildContext's across async gaps •
+          pulsehearflutter-main/pulse_hear-main/lib/views/bluetooth-asayel/bluetooth_search_scre
+          en.dart:183:44 • use_build_context_synchronously
+warning • Unused import:
+       'package:pulse_hear/views/bluetooth-asayel/bluetooth_search_screen.dart' •
+       pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart:3:
+       8 • unused_import
+warning • Unused import:
+       'package:pulse_hear/views/soundlibrary-asayel/sound_library_screen.dart' •
+       pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart:4:
+       8 • unused_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :78:43 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :131:61 • deprecated_member_use
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :175:27 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :180:27 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :185:27 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :205:36 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :210:36 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :215:36 • avoid_print
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/dashboard-asayel/dashboard_screen.dart
+          :239:35 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :73:33 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :75:52 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :78:37 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :452:41 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :484:41 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :550:33 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :627:39 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :632:41 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/keywords-elaf/add_keywords_screen.dart
+          :646:45 • deprecated_member_use
+warning • Unused import: 'package:google_fonts/google_fonts.dart' •
+       pulsehearflutter-main/pulse_hear-main/lib/views/soundlibrary-asayel/sound_library_screen.
+       dart:2:8 • unused_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/soundlibrary-asayel/sound_library_scre
+          en.dart:88:53 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/soundlibrary-asayel/sound_library_scre
+          en.dart:194:41 • deprecated_member_use
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This
+          feature was deprecated after v3.31.0-2.0.pre •
+          pulsehearflutter-main/pulse_hear-main/lib/views/soundlibrary-asayel/sound_library_scre
+          en.dart:213:19 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/lib/views/soundlibrary-asayel/sound_library_scre
+          en.dart:258:53 • deprecated_member_use
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/views/splash-elaf/splash_screen.dart:37:27 •
+          prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/lib/views/splash-elaf/splash_screen.dart:39:27 •
+          prefer_const_constructors
+   info • Use 'const' literals as arguments to constructors of '@immutable' classes •
+          pulsehearflutter-main/pulse_hear-main/lib/views/splash-elaf/splash_screen.dart:40:27 •
+          prefer_const_literals_to_create_immutables
+warning • The asset file 'assets/models/yamnet.tflite' doesn't exist •
+       pulsehearflutter-main/pulse_hear-main/pubspec.yaml:31:7 • asset_does_not_exist
+  error • The named parameter 'service' isn't defined •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/main.dart:34:52 •
+         undefined_named_parameter
+   info • Constructors for public widgets should have a named 'key' parameter •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:4:7
+          • use_key_in_widget_constructors
+   info • Invalid use of a private type in a public API •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:6:3
+          • library_private_types_in_public_api
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:31:
+          16 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:32:
+          26 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:36:
+          18 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:40:
+          13 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:43:
+          22 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:45:
+          13 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:48:
+          22 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:50:
+          13 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:53:
+          22 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:56:
+          13 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:65:
+          34 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:67:
+          26 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/screens/home_screen.dart:69:
+          22 • prefer_const_constructors
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/ble_audio_service.d
+          art:17:5 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/ble_audio_service.d
+          art:25:5 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/ble_audio_service.d
+          art:30:5 • avoid_print
+  error • The method 'Uint8List' isn't defined for the type 'BleAudioService' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/ble_audio_service.da
+         rt:49:22 • undefined_method
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/ble_audio_service.d
+          art:53:5 • avoid_print
+  error • The operator '>' can't be unconditionally invoked because the receiver can be 'null' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/ble_audio_service.da
+         rt:56:30 • unchecked_use_of_nullable_value
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/ble_audio_service.d
+          art:65:5 • avoid_print
+warning • The value of the field '_sampleRate' isn't used •
+       pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/yamnet_classifier.dart
+       :7:16 • unused_field
+  error • The named parameter 'allowPrecisionLoss' isn't defined •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/yamnet_classifier.da
+         rt:17:9 • undefined_named_parameter
+  error • Undefined name 'TfLiteInferencePriority' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/yamnet_classifier.da
+         rt:18:29 • undefined_identifier
+  error • Undefined name 'TfLiteInferencePriority' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/yamnet_classifier.da
+         rt:19:29 • undefined_identifier
+  error • Undefined name 'TfLiteInferencePriority' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/yamnet_classifier.da
+         rt:20:29 • undefined_identifier
+  error • The named parameter 'inferencePriority4' isn't defined •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/yamnet_classifier.da
+         rt:21:9 • undefined_named_parameter
+  error • Undefined name 'TfLiteInferencePriority' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/yamnet_classifier.da
+         rt:21:29 • undefined_identifier
+  error • The element type 'String' can't be assigned to the map value type 'double' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/services/yamnet_classifier.da
+         rt:79:16 • map_value_type_not_assignable
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/bluetooth-asayel/bluet
+          ooth_search_screen.dart:59:48 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/bluetooth-asayel/bluet
+          ooth_search_screen.dart:71:48 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/bluetooth-asayel/bluet
+          ooth_search_screen.dart:99:38 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/bluetooth-asayel/bluet
+          ooth_search_screen.dart:108:36 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:73:43 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:121:51 • deprecated_member_use
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:176:31 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:181:31 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:186:31 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:207:36 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:212:36 • avoid_print
+   info • Don't invoke 'print' in production code •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:217:36 • avoid_print
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:241:35 • deprecated_member_use
+  error • Classes can't be declared inside other classes •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:267:3 • class_in_class
+  error • Expected a class member •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:267:25 • expected_class_member
+   info • The variable name 'StatefulWidget' isn't a lowerCamelCase identifier •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:267:33 • non_constant_identifier_names
+  error • Methods must have an explicit list of parameters •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:267:33 • missing_method_parameters
+  error • Undefined class 'BleAudioService' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:268:9 • undefined_class
+warning • The value of the local variable 'service' isn't used •
+       pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashboar
+       d_screen.dart:268:25 • unused_local_variable
+  error • Too many positional arguments: 0 expected, but 1 found •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:25 • extra_positional_arguments_could_be_named
+  error • Conditions must have a static type of 'bool' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:26 • non_bool_condition
+  error • In constant expressions, operands of this operator must be of type 'bool' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:26 • const_eval_type_bool
+  error • Expected an identifier •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:34 • missing_identifier
+  error • Expected to find ':' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:34 • expected_token
+   info • 'required' is deprecated and shouldn't be used. In Dart 2.12 and later, use the
+          built-in `required` keyword to mark a named parameter as required •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:270:36 • deprecated_member_use
+  error • Expected to find ',' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:45 • expected_token
+  error • The getter 'service' isn't defined for the type 'DashboardScreen' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:50 • undefined_getter
+  error • Expected to find ';' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:58 • expected_token
+  error • Expected an identifier •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:60 • missing_identifier
+  error • Unexpected text ';' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:60 • unexpected_token
+  error • The expression doesn't evaluate to a function, so it can't be invoked •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:270:62 • invocation_of_non_function_expression
+  error • State isn't a type •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:273:3 • not_a_type
+warning • The declaration 'createState' isn't referenced •
+       pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashboar
+       d_screen.dart:273:26 • unused_element
+  error • The method '_DashboardScreenState' isn't defined for the type 'DashboardScreen' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:273:43 • undefined_method
+  error • Classes can't be declared inside other classes •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:276:3 • class_in_class
+  error • Expected a class member •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:276:31 • expected_class_member
+   info • The variable name 'State' isn't a lowerCamelCase identifier •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:276:39 • non_constant_identifier_names
+  error • Methods must have an explicit list of parameters •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:276:39 • missing_method_parameters
+   info • The type parameter name 'DashboardScreen' matches a visible type name •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashb
+          oard_screen.dart:276:45 • avoid_types_as_parameter_names
+warning • The declaration 'build' isn't referenced •
+       pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashboar
+       d_screen.dart:278:10 • unused_element
+  error • Undefined name 'widget' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:286:3 • undefined_identifier
+  error • Undefined name 'widget' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:287:3 • undefined_identifier
+  error • Undefined name 'widget' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:289:15 • undefined_identifier
+  error • Undefined name 'widget' •
+         pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/dashboard-asayel/dashbo
+         ard_screen.dart:290:14 • undefined_identifier
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:73:33 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:75:52 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:78:37 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:452:41 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:484:41 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:550:33 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:627:39 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:632:41 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/keywords-elaf/add_keyw
+          ords_screen.dart:646:45 • deprecated_member_use
+warning • Unused import: 'package:google_fonts/google_fonts.dart' •
+       pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/soundlibrary-asayel/sound
+       _library_screen.dart:2:8 • unused_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/soundlibrary-asayel/so
+          und_library_screen.dart:88:53 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/soundlibrary-asayel/so
+          und_library_screen.dart:194:41 • deprecated_member_use
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This
+          feature was deprecated after v3.31.0-2.0.pre •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/soundlibrary-asayel/so
+          und_library_screen.dart:213:19 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid
+          precision loss •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/soundlibrary-asayel/so
+          und_library_screen.dart:258:53 • deprecated_member_use
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/splash-elaf/splash_scr
+          een.dart:37:27 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/splash-elaf/splash_scr
+          een.dart:39:27 • prefer_const_constructors
+   info • Use 'const' literals as arguments to constructors of '@immutable' classes •
+          pulsehearflutter-main/pulse_hear-main/pulse_hear-main/lib/views/splash-elaf/splash_scr
+          een.dart:40:27 • prefer_const_literals_to_create_immutables
+
+204 issues found. (ran in 1.9s)
+lama@Raghads-MacBook-Pro pulsehearflutter-main-2 % 
