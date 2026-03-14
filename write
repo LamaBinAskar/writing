@@ -1,3 +1,13 @@
-flutter clean
-flutter pub get
-flutter run
+tor_graphics_compiler 1.1.20 (1.2.0 available)
+Got dependencies!
+29 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Connected devices:
+macOS (desktop) • macos  • darwin-arm64   • macOS 26.3.1 25D2128 darwin-arm64
+Chrome (web)    • chrome • web-javascript • Google Chrome 146.0.7680.76
+
+No wireless devices were found.
+
+[1]: macOS (macos)
+[2]: Chrome (chrome)
+Please choose one (or "q" to quit): 
