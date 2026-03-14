@@ -797,3 +797,19 @@
 	"modelVersionId": 3,
 	"origin": "extHost1"
 }]
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel stable, 3.41.4, on macOS 26.3.1 25D2128 darwin-arm64, locale en-GB)
+[✗] Android toolchain - develop for Android devices
+    ✗ Unable to locate Android SDK.
+      Install Android Studio from: https://developer.android.com/studio/index.html
+      On first launch it will assist you in installing the Android SDK components.
+      (or visit https://flutter.dev/to/macos-android-setup for detailed instructions).
+      If the Android SDK has been installed to a custom location, please use
+      `flutter config --android-sdk` to update to that location.
+
+[✓] Xcode - develop for iOS and macOS (Xcode 26.3)
+[✓] Chrome - develop for the web
+[✓] Connected device (2 available)
+[✓] Network resources
+
+! Doctor found issues in 1 category.
