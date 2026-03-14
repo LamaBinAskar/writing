@@ -1,40 +1,79 @@
 import 'package:flutter/material.dart';
-import 'views/splash-elaf/splash_screen.dart';
-import 'views/auth-elaf/start_screen.dart';
-import 'views/auth-elaf/sign_in_screen.dart';
-import 'views/auth-elaf/sign_up_screen.dart';
-import 'views/bluetooth-asayel/bluetooth_search_screen.dart';
-import 'views/dashboard-asayel/dashboard_screen.dart';
-import 'views/soundlibrary-asayel/sound_library_screen.dart';
-import 'views/keywords-elaf/add_keywords_screen.dart';
-import 'services/ble_audio_service.dart'; // ← إضافة جديدة
+import 'yamnet_classifier.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+class BleAudioService extends ChangeNotifier {
+  final YamnetClassifier yamnet = YamnetClassifier();
+  bool isConnected = false;
+  String deviceName = '';
+  double batteryLevel = 100.0;
+  bool isListening = false;
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  BleAudioService() {
+    init();
+  }
+
+  Future<void> init() async {
+    await yamnet.init();
+    print('✅ BLE Audio Service + YAMNet initialized');
+  }
+
+  // ربط مع ESP32S3
+  Future<void> connectToESP32(String espName) async {
+    isConnected = true;
+    deviceName = espName;
+    notifyListeners();
+    print('🔗 Connected to $espName');
+  }
+
+  // استقبال إشارة من السوار
+  Future<void> onDeviceSignal(String signal) async {
+    print('📡 Received signal: $signal');
+
+    switch (signal) {
+      case 'adhan_detected':
+      case 'need_deep_analysis':
+        await analyzeCurrentAudio();
+        break;
+      case 'battery_update':
+      // تحديث البطارية
+        notifyListeners();
+        break;
+    }
+  }
+
+  Future<void> analyzeCurrentAudio() async {
+    isListening = true;
+    notifyListeners();
+
+    // dummy audio buffer (لاحقًا من just_audio)
+    final pcmBytes = Uint8List(31200);
+
+    final result = yamnet.classify(pcmBytes);
+
+    print('🧠 YAMNet: ${result['label']} (${result['confidence']})');
+
+    if (result['label'].toString().toLowerCase().contains('prayer') ||
+        result['confidence'] > 0.7) {
+      triggerAdhanAlert();
+    }
+
+    isListening = false;
+    notifyListeners();
+  }
+
+  void triggerAdhanAlert() {
+    print('🕌 أذان مُكتشف! إشعار + اهتزاز');
+    // هنا: local notification + vibration
+  }
+
+  void disconnect() {
+    isConnected = false;
+    notifyListeners();
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'PulseHear',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
-      initialRoute: '/splash',
-      routes: {
-        '/splash': (context) => const SplashScreen(),
-        '/start': (context) => const StartScreen(),
-        '/signin': (context) => const SignInScreen(),
-        '/signup': (context) => const SignUpScreen(),
-        '/bluetooth': (context) => const PairWristbandScreen(),
-        '/dashboard': (context) => DashboardScreen(service: BleAudioService()), // ← تمرير service
-        '/sounds': (context) => const SoundLibraryScreen(),
-        '/keywords': (context) => const KeywordsScreen(),
-      },
-    );
+  void dispose() {
+    yamnet.dispose();
+    super.dispose();
   }
 }
