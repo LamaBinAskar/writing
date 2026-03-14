@@ -1,8 +1,4 @@
-
-/Users/lama/Downloads/pulsehearflutter-main
-Pulsehear-Flutter       pulsehearflutter-main
-cd: no such file or directory: /Users/lama/Downloads/pulsehearflutter-main/pulse_hear-main
-/Users/lama/Downloads/pulsehearflutter-main
-Pulsehear-Flutter       pulsehearflutter-main
-Expected to find project root in current working directory.
-lama@Raghads-MacBook-Pro pulsehearflutter-main % 
+cd "/Users/lama/Downloads/pulsehearflutter-main"
+ls
+cd "Pulsehear-Flutter"
+ls
