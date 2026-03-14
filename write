@@ -1,87 +1,86 @@
-import 'package:flutter/material.dart';
-import '../services/ble_audio_service.dart';
+import 'dart:typed_data';
+import 'package:flutter/services.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 
-class HomeScreen extends StatefulWidget {
-  final BleAudioService service;
-  const HomeScreen({super.key, required this.service});
+class YamnetClassifier {
+  static const _modelPath = 'assets/models/yamnet.tflite';
+  static const int _frameLength = 15600;
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  late final Interpreter _interpreter;
+  final List<String> labels = List.filled(521, 'unknown');
 
-class _HomeScreenState extends State<HomeScreen> {
-  String _status = 'جاهز للاستماع...';
-  String _lastDetection = '';
+  Future<void> init() async {
+    // بدون GPU delegate - يشتغل على iOS و Android و macOS
+    final options = InterpreterOptions()..threads = 2;
 
-  @override
-  void initState() {
-    super.initState();
-    widget.service.addListener(_updateUI);
-  }
-
-  void _updateUI() {
-    setState(() {
-      _status = widget.service.isListening ? 'يستمع...' : 'جاهز';
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('PulseHear'),
-        backgroundColor: const Color(0xFF71A39E),
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.hearing_outlined,
-              size: 120,
-              color: Color(0xFF005352),
-            ),
-            const SizedBox(height: 30),
-            Text(
-              _status,
-              style: const TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              _lastDetection.isEmpty
-                  ? 'انتظر إشارة من السوار'
-                  : _lastDetection,
-              style: const TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () async {
-                await widget.service.onDeviceSignal('adhan_detected');
-                setState(() {
-                  _lastDetection = 'تم تحليل الصوت بـ YAMNet!';
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF005352),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40, vertical: 15),
-              ),
-              child: const Text('اختبار YAMNet (أذان)'),
-            ),
-          ],
-        ),
-      ),
+    _interpreter = await Interpreter.fromAsset(
+      _modelPath,
+      options: options,
     );
+
+    debugPrint('[YamnetClassifier] Loaded successfully');
   }
 
-  @override
+  Float32List prepareInput(Uint8List pcmBytes) {
+    final nSamples = pcmBytes.lengthInBytes ~/ 2;
+    final samples = Float32List(_frameLength);
+
+    for (int i = 0; i < samples.length; i++) {
+      if (i < nSamples) {
+        final offset = i * 2;
+        final byte1 = pcmBytes[offset];
+        final byte2 = pcmBytes[offset + 1];
+        int s = (byte2 << 8) | byte1;
+        if (s > 32767) s -= 65536; // تحويل لـ signed
+        samples[i] = (s / 32768.0).clamp(-1.0, 1.0);
+      } else {
+        samples[i] = 0.0;
+      }
+    }
+
+    return samples;
+  }
+
+  Map<String, dynamic> classify(Uint8List pcmBytes) {
+    final input = prepareInput(pcmBytes);
+
+    // YAMNet input: [15600] → output: [1, 521]
+    final inputTensor = [input.toList()];
+    final outputTensor = [List.filled(521, 0.0)];
+
+    _interpreter.run(inputTensor, outputTensor);
+
+    double maxScore = 0;
+    int maxIndex = 0;
+
+    for (int i = 0; i < 521; i++) {
+      final score = outputTensor[0][i];
+      if (score > maxScore) {
+        maxScore = score;
+        maxIndex = i;
+      }
+    }
+
+    return {
+      'label': labels[maxIndex],
+      'confidence': maxScore,
+    };
+  }
+
+  Future<void> readLabels(String fileName) async {
+    try {
+      final raw = await rootBundle.loadString('assets/labels/$fileName');
+      final lines = raw.split('\n');
+      for (int i = 0; i < lines.length && i < 521; i++) {
+        labels[i] = lines[i].trim();
+      }
+      debugPrint('[YamnetClassifier] Labels loaded: ${lines.length}');
+    } catch (e) {
+      debugPrint('[YamnetClassifier] Labels error: $e');
+    }
+  }
+
   void dispose() {
-    widget.service.removeListener(_updateUI);
-    super.dispose();
+    _interpreter.close();
   }
 }
