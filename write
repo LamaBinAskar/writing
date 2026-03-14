@@ -1,5 +1,9 @@
-Pulsehear-Flutter       pulsehearflutter-main
-lama@Raghads-MacBook-Pro Pulsehear-Flutter % flutter clean  flutter pub get
-Error: No pubspec.yaml file found.
-This command should be run from the root of your Flutter project.
-lama@Raghads-MacBook-Pro Pulsehear-Flutter % 
+cd "/Users/lama/Downloads/pulsehearflutter-main/Pulsehear-Flutter"
+
+ls   # (بس للتأكيد إنك تشوفين pubspec.yaml)
+
+flutter clean
+
+flutter pub get
+
+flutter run
