@@ -1,6 +1,10 @@
-cd "/Users/lama/Downloads/pulsehearflutter-main/pulsehearflutter-main/pulse_hear-main"
-code pubspec.yaml
-
-flutter clean
-flutter pub get
-flutter run
+Cleaning Xcode workspace...                                        600ms
+Resolving dependencies... 
+Error on line 20, column 23 of pubspec.yaml: Invalid version constraint: Cannot include other constraints with "^" constraint in "^11.3.1 speech_to_text:^6.6.0".
+   ╷
+20 │     permission_handler: ^11.3.1
+   │ ┌───────────────────────^
+21 │ └     speech_to_text:^6.6.0
+   ╵
+Failed to update packages.
+Connected devices:
