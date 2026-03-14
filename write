@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../services/bluetooth_service.dart';
 import '../services/ble_audio_service.dart';
 
 class HomeScreen extends StatefulWidget {
+  final BleAudioService bleService;
+
+  const HomeScreen({super.key, required this.bleService});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late BluetoothService _bleService;
-  late BleAudioService _audioService;
   String _status = 'جاهز للاستماع...';
   String _lastDetection = '';
   final TextEditingController _keywordController = TextEditingController();
@@ -18,126 +18,116 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // إنشاء الخدمات
-    _bleService = BluetoothService();
-    _audioService = BleAudioService(bleService: _bleService);
-
-    // تحديث الواجهة عند تغيير
-    _audioService.addListener(_updateUI);
-    _bleService.addListener(_updateUI);
+    widget.bleService.addListener(_updateUI);
   }
 
   void _updateUI() {
     setState(() {
-      _status = _audioService.isListening ? 'يستمع...' : (_bleService.isConnected ? 'متصل' : 'غير متصل');
-      _lastDetection = _audioService.lastYamnetLabel.isNotEmpty 
-        ? 'آخر صوت: ${_audioService.lastYamnetLabel}'
-        : _bleService.lastDetectedLabel.isNotEmpty
-          ? 'آخر إشارة: ${_bleService.lastDetectedLabel}'
-          : 'انتظر إشارة من السوار';
+      _status = widget.bleService.isListening
+          ? 'يستمع...'
+          : (widget.bleService.isConnected ? 'متصل' : 'غير متصل');
+
+      _lastDetection =
+          'انتظر إشارة من السوار'; // تقدرِين تربطينها لاحقًا بنتيجة YAMNet
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final service = widget.bleService;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('PulseHear'),
-        backgroundColor: Color(0xFF71A39E),
+        title: const Text('PulseHear'),
+        backgroundColor: const Color(0xFF71A39E),
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: Icon(_bleService.isConnected ? Icons.bluetooth_connected : Icons.bluetooth),
+            icon: Icon(
+              service.isConnected
+                  ? Icons.bluetooth_connected
+                  : Icons.bluetooth,
+            ),
             onPressed: () {
-              if (_bleService.isConnected) {
-                _bleService.disconnect();
+              if (service.isConnected) {
+                service.disconnect();
               } else {
-                _bleService.startScan();
+                service.connectToESP32('XIAO_ESP32S3');
               }
             },
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
-            Icon(
+            const SizedBox(height: 20),
+            const Icon(
               Icons.hearing_outlined,
               size: 120,
               color: Color(0xFF005352),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Text(
               _status,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
                 _lastDetection,
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 30),
-            
-            // قسم الكلمات المفتاحية
+            const SizedBox(height: 30),
+
+            // قسم الكلمات المفتاحية (هنا بس UI، لسه ما ربطناه فعليًا بالخدمة)
             Card(
-              color: Color(0xFFF5F5F5),
+              color: const Color(0xFFF5F5F5),
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'الكلمات المفتاحية',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: _audioService.keywords
-                          .map((keyword) => Chip(
-                                label: Text(keyword),
-                                deleteIcon: Icon(Icons.close, size: 18),
-                                onDeleted: () => _audioService.removeKeyword(keyword),
-                              ))
-                          .toList(),
-                    ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
+                    // TODO: اربطيها بـ keywords من BleAudioService لما تضيفينها هناك
+                    const Text('سيتم ربطها لاحقًا بالخدمة'),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         Expanded(
                           child: TextField(
                             controller: _keywordController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'أضف كلمة جديدة',
                               border: OutlineInputBorder(),
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         ElevatedButton(
                           onPressed: () {
-                            if (_keywordController.text.isNotEmpty) {
-                              _audioService.addKeyword(_keywordController.text);
-                              _keywordController.clear();
-                            }
+                            _keywordController.clear();
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF005352),
+                            backgroundColor: const Color(0xFF005352),
                             foregroundColor: Colors.white,
                           ),
-                          child: Icon(Icons.add),
+                          child: const Icon(Icons.add),
                         ),
                       ],
                     ),
@@ -145,40 +135,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            
-            SizedBox(height: 20),
-            
-            // زر اختبار
+
+            const SizedBox(height: 20),
+
             ElevatedButton(
               onPressed: () async {
-                // محاكاة إشارة BG من ESP32
-                await _audioService._handleBleSignal('BG');
+                await service.onDeviceSignal('adhan_detected');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF005352),
+                backgroundColor: const Color(0xFF005352),
                 foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 40, vertical: 15),
               ),
-              child: Text('اختبار YAMNet'),
+              child: const Text('اختبار YAMNet'),
             ),
-            
-            SizedBox(height: 10),
-            
-            if (_audioService.lastRecognizedText.isNotEmpty)
-              Card(
-                color: Colors.amber[50],
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Text('النص المعترف به:',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      SizedBox(height: 5),
-                      Text(_audioService.lastRecognizedText),
-                    ],
-                  ),
-                ),
-              ),
           ],
         ),
       ),
@@ -187,10 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _audioService.removeListener(_updateUI);
-    _bleService.removeListener(_updateUI);
-    _audioService.dispose();
-    _bleService.dispose();
+    widget.bleService.removeListener(_updateUI);
     _keywordController.dispose();
     super.dispose();
   }
